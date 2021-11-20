@@ -1,0 +1,146 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Дрэды и афропрически в Магнитогорске</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
+	<link rel="stylesheet"  href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link href="{% static '/css/style.css' %}" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+
+<body>
+	<header>
+		<div class="wrap-nav">
+			<nav class="header-nav">
+				<a href="#about-me">О СТУДИИ</a>
+				<a href="#service">НАШИ УСЛУГИ</a>
+				<a href="#work">ПРИМЕРЫ РАБОТ</a>
+				<a href="#contact">КОНТАКТЫ</a>
+			</nav>
+		</div>
+		<div class="fullscreen-bg">
+			<div class="overlay">
+				<h1>ДОБРО ПОЖАЛОВАТЬ В СТУДИЮ<br><span>NENCY_AFRO</span></h1>
+			</div>
+			{% for vid in video %}
+			<video loop muted autoplay class="fullscreen-bg__video">
+				<source src="{{ vid.video_file.url }}" type="video/mp4">
+			</video>
+			{% endfor %}
+		</div>
+	</header>
+	<main>
+		<section class="about-me" id="about-me">
+			<article>
+				<h2>О СТУДИИ</h2>
+			</article>
+			<div class="about-me-wrapper">
+				<div class="about-me-picture">
+					<img src="{% static '/img/about-me.jpg' %}">
+				</div>
+				<div class="about-me-text">
+					{% for about in about_me %}
+						<h3>{{ about.description }}</h3>
+					{% endfor %}
+				</div>
+
+			</div>
+		</section>
+		<section class="services" id="service">
+			<article>
+				<h2>НАШИ УСЛУГИ</h2>
+			</article>
+			<div class="services-icons">
+				<div class="services-icon1">
+					<img src="{% static '/img/services-icon1.png' %}">
+					<h3>{{ services_dreds.name }}</h3>
+					<p>{{ services_dreds.description }}</p>
+				</div>
+				<div class="services-icon2">
+					<img src="{% static '/img/services-icon2.png' %}">
+					<h3>{{ services_afro.name }}</h3>
+					<p>{{ services_afro.description }}</p>
+				</div>
+				<div class="services-icon3">
+					<img src="{% static '/img/services-icon3.png' %}">
+					<h3>{{ services_braids.name }}</h3>
+					<p>{{ services_braids.description }}</p>
+				</div>
+				<div class="services-icon4">
+					<img src="{% static '/img/services-icon4.png' %}">
+					<h3>{{ services_learn.name }}</h3>
+					<p>{{ services_learn.description }}</p>
+				</div>
+			</div>
+		</section>
+		<section class="works" id="work">
+			<h2>ПРИМЕРЫ РАБОТ</h2>
+			<h3>{{ services_dreds.name }}</h3>
+			<div class="image-slider swiper-container">
+				<div class="image-slider__wrapper swiper-wrapper">
+					{% for dred in dreds_img %}
+						<div class="image-slider__slide swiper-slide">
+							<img src="{{ dred.dreds_img.url }}" height="750px" alt="Фото работ">
+						</div>
+					{% endfor %}
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+            <h3>{{ services_afro.name }}</h3>
+            <div class="image-slider swiper-container">
+                <div class="image-slider__wrapper swiper-wrapper">
+                    {% for afro in afro_img %}
+                    <div class="image-slider__slide swiper-slide">
+                        <img src="{{ afro.afro_img.url  }}" height="750x" alt="Фото работ">
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <h3>{{ services_braids.name }}</h3>
+            <div class="image-slider swiper-container">
+                <div class="image-slider__wrapper swiper-wrapper">
+                    {% for braid in braids_img %}
+                    <div class="image-slider__slide swiper-slide">
+                        <img src="{{ braid.braids_img.url }}" height=750px" alt="Фото работ">
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+		</section>
+	</main>
+	<footer>
+		<h2>КОНТАКТЫ</h2>
+		<div class="contacts" id="contact">
+			<div class="cotacts-1">
+				<a href="https://instagram.com/nency_afro"><img src="{% static '/img/instagram.png' %}" height="36px" width="36px">nency_afro</a>
+				<a href="https://vk.com/nency_afro"><img src="{% static '/img/vk.png' %}" height="36px" width="36px">nency_afro</a>
+			</div>
+			<div class="contacts-2">
+				<a href="#"><img src="{% static '/img/whatsup.png' %}" height="36px" width="36px">+7(999)588-53-05</a>
+				<a href="#"><img src="{% static '/img/tg.png' %}" height="36px" width="36px">+7(999)588-53-05</a>
+			</div>
+		</div>
+		<div class="footer-form">
+			<h3 class="form-article">Отправьте заявку,<br>и мы свяжемся с Вами в ближайшее время.</h3>
+			<form action="{% url 'get_order' %}" method="post">
+				{% csrf_token %}
+				<div class="form">
+					<div>{{ form.name.label }} {{ form.name }}</div>
+					<div>{{ form.phone.label }} {{ form.phone }}</div>
+				</div>
+				<div class="footer-button">
+					<button class="btn" type="submit">ОТПРАВИТЬ</button>
+				</div>
+			</form>
+		</div>
+	</footer>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+	<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+</body>
+</html>

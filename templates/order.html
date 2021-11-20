@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Дрэды и афропрически в Магнитогорске</title>
+    <link href="{% static '/css/style.css' %}" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+
+<body>
+    <section class="thanks-page">
+        <article>
+			<h2>Ваш запрос отправлен!</h2>
+            <div>
+                <p>{{ name }}, спасибо за Ваш запрос. Мы ответим Вам в ближайшее время.</p>
+                <a href="{% url 'webpage' %}">Главная страница</a>
+            </div>
+        </article>
+    </section>
+</body>
+</html>
